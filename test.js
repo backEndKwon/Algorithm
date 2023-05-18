@@ -1,19 +1,23 @@
-//한번만 등장한 문자
+//대문자와 소문자
 
-//84%
-//   s	        result
-// "abcabcadc"	  "d"
-// "abdc"	      "abcd"
-// "hello"	      "eho"
 
-// 전략 : 한번만 등장한다고 했기떄문에 배열 길이가 2인경우만 확인하면 될것같다.
+//88%
+//  my_string	result
+// "cccCCC"	"CCCccc"
+// "abCdEfghIJ"	"ABcDeFGHij"
+
+// 전략 : toUpperCase 배운걸로 풀기.
 function solution(n) {
-let answer = []
-  n.split('').map((a)=> n.split(a).length===2 ? answer.push(a):false )
-return answer.sort().join('')
+return   n.split('').map((a)=>a === a.toUpperCase() ? a.toLowerCase() : a.toUpperCase() ).join('')
 }
-
-console.log(solution( "abcabcadc"));
-console.log(solution("abdc"))
-console.log(solution("hello"))
+// 다른사람 풀이:
+==> 문자열은 +로 붙일 수 있다
+==> answer += c를 시키면서 동시에 c와 c.toLowerCase()에 조건을 달아줄수있다.
+function solution(my_string) {
+  var answer = '';
+  for (let c of my_string) answer += c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase();
+  return answer;
+}
+console.log(solution( "cccCCC"));
+console.log(solution("abCdEfghIJ"))
 
