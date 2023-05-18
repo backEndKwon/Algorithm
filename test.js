@@ -1,23 +1,17 @@
-//대문자와 소문자
+//문자열
 
+//78%
+// // A	B	result
+// "hello"	"ohell"	1
+// "apple"	"elppa"	-1
+// "atat"	"tata"	1
+// "abc"	"abc"	0
 
-//88%
-//  my_string	result
-// "cccCCC"	"CCCccc"
-// "abCdEfghIJ"	"ABcDeFGHij"
-
-// 전략 : toUpperCase 배운걸로 풀기.
-function solution(n) {
-return   n.split('').map((a)=>a === a.toUpperCase() ? a.toLowerCase() : a.toUpperCase() ).join('')
+// 전략 : a가 어디로갔는지 확인
+function solution(A,B) {
+return (B+B).indexOf(A)
 }
-// 다른사람 풀이:
-==> 문자열은 +로 붙일 수 있다
-==> answer += c를 시키면서 동시에 c와 c.toLowerCase()에 조건을 달아줄수있다.
-function solution(my_string) {
-  var answer = '';
-  for (let c of my_string) answer += c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase();
-  return answer;
-}
-console.log(solution( "cccCCC"));
-console.log(solution("abCdEfghIJ"))
-
+console.log(solution( "hello"	,"ohell"));
+console.log(solution("apple",	"elppa")) 
+console.log(solution("atat",	"tata"))
+console.log(solution("abc",	"abc"));
