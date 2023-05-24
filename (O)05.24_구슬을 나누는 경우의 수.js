@@ -12,9 +12,9 @@ n!/(n-m)!*m!
                                                             */
 
 function solution(ball, share) {
-  return Math.round(nfactory(ball)/(nfactory(ball-share)*nfactory(share)))
+  return Math.round(factorial(ball)/(factorial(ball-share)*factorial(share)))
 }
-function nfactory(n) {
+function factorial(n) {
   let answer = 1;
   for (let i = 1; i <= n; i++) {
     answer *= i;
@@ -22,7 +22,7 @@ function nfactory(n) {
   return answer;
 }
 //팰토리얼 간지나는 식
-const factorier = (num) => num ===0 ? 1 : num * factorier(num-1)
+const factorial = (num) => num ===0 ? 1 : num * factorial(num-1)
 
 console.log(solution(3, 2));
 console.log(solution(5, 3));
