@@ -33,7 +33,7 @@
 // }
 //실패
 
-//전략 2 : 각 0번재 값중 최댓값, 1번째깞중 최댓값 구하기
+//전략 2 : 각 0번째 값중 최댓값, 1번째값 최댓값 구하기
 function solution(lines) {
   let start = lines.map((x) => (x = x[0])); //[ 0, 2, 3 ]
   let end = lines.map((x) => (x = x[1])); //[ 1, 5, 9 ]
@@ -43,11 +43,6 @@ function solution(lines) {
   for (let i = Math.min(...start); i < Math.max(...end); i++) {
     //i는 0~9까지 돈다
     for (let j = 0; j < lines.length; j++) {
-    //j는 3회 돈다 
-    //ex. i=0// j=0 일때 성립 single=1, j=1일때 성립 single=2 그려면 double= 1, single초기화, j=2일때 성립x
-    //ex i=1// j=0 일때 성립 성립 x , j=1일때 성립 o, j=2일때 성립  o dobule = 1,
-    //ex i=2// j=0 일때 성립 성립 x, j=1일때 성립o , j=2일때 성립 성립 o > dobule =1
-    //ex i=3// j=0일때 성립x, 1  
     if (i >= start[j] && i < end[j]) {
         single++;
       }
