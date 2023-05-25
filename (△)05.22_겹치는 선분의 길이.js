@@ -43,14 +43,14 @@ function solution(lines) {
   for (let i = Math.min(...start); i < Math.max(...end); i++) {
     //i는 0~9까지 돈다
     for (let j = 0; j < lines.length; j++) {
-    if (i >= start[j] && i < end[j]) {
+      if (i >= start[j] && i < end[j]) {
         single++;
       }
     }
     if (single >= 2) {
       double++;
     }
-    single = 0;//single 초기화
+    single = 0; //single 초기화
   }
   return double;
 }
