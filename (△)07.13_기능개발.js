@@ -18,35 +18,39 @@ day = 100-progresses[i]/speeds[i]
 function solution(progresses, speeds) {
   let count = 1;
   const answer = [];
-  
-  let days = progresses.map((progresses,idx)=>(100 - progresses) / speeds[idx])
-  let maxDay = days[0] //day최대값을 처음 0번째로 설정(초기화개념)
-  for(let i=1; i<days.length; i++){
-    if(days[i]<=maxDay){
+
+  let days = progresses.map(
+    (progresses, idx) => (100 - progresses) / speeds[idx]
+  );
+  let maxDay = days[0]; //day최대값을 처음 0번째로 설정(초기화개념)
+  for (let i = 1; i < days.length; i++) {//왜 인덱스 0부터 비교하지 않아도 되는거지..?
+    if (days[i] <= maxDay) {
       count += 1;
-    }else{
-      maxDay = days[i]// 최대일자에 현재 일자를 기준으로 바꿔줌
+    } else {
+      maxDay = days[i]; // 최대일자에 현재 일자를 기준으로 바꿔줌
       answer.push(count);
-      count = 1
+      count = 1;
     }
   }
   answer.push(count);
 
-  // for (let i = 0; i < progresses.length; i++) {
-  //   let yesterday = (100 - progresses[i]) / speeds[i];
-  //   let today = (100 - progresses[i + 1]) / speeds[i + 1];
-  //   if (yesterday < today) {
-  //     count += 1
-  //     answer.push(count);
-  //   } else if (yesterday >= today) {
-  //     count += 1;
-  //   } 
-  //   if (progresses[i] === progresses[progresses.length - 1]) {
-  //     answer.push(count);
-  //   }
-  // }
-  return answer
+  return answer;
 }
 
 console.log(solution([93, 30, 55], [1, 30, 5]));
 console.log(solution([95, 90, 99, 99, 80, 99], [1, 1, 1, 1, 1, 1]));
+
+//실패 과정
+// for (let i = 0; i < progresses.length; i++) {
+//   let yesterday = (100 - progresses[i]) / speeds[i];
+//   let today = (100 - progresses[i + 1]) / speeds[i + 1];
+//   if (yesterday < today) {
+//     count += 1
+//     answer.push(count);
+//   } else if (yesterday >= today) {
+//     count += 1;
+//   }
+//   if (progresses[i] === progresses[progresses.length - 1]) {
+//     answer.push(count);
+//   }
+// }
