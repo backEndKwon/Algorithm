@@ -38,7 +38,7 @@ function solution(rows, columns, queries) { //[1, 1, 5, 3]
   return x1
 }
 
-  return x1
+  return array
 }
 
 console.log(
