@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <canvas width="500" height="500"></canvas>
+    <div>
+        <label for="degrees">각도 : </label>
+        <input type="text" size="3" id="degrees" />
+        <button id="draw">그리기</button>
+        <button id="erase">지우기</button>
+    </div>
+    <script>
+        const canvases = document.querySelector("canvas");
+        const canvas = canvases.getContext("2d");
+
+        canvas.translate(canvas.width / 2, -canvas.height / 2);
+
+        $("#erase").click(function () {
+            canvas.clearRect(-canvas.width, -canvas.height, canvas.width * 2, canvas.height * 2);
+        });
+
+        $("#draw").click(function () {
+            console.log("=====>", parseFloat($("#degrees").val()));
+            if (parseFloat($("#degrees").val()) == 0) {
+                alert("각도를 입력하세요");
+                return;
+            } else {
+                for (
+                    let angle = 0;
+                    angle < 4 * 360;
+                    angle += parseFloat($("#degrees").val())
+                ) {
+                    let theta = (2 * Math.PI * angle) / 360;
+                    let r = theta * 10;
+                    canvas.beginPath();
+                    canvas.arc(
+                        r * Math.cos(theta),
+                        r * Math.sin(theta),
+                        3,
+                        0,
+                        2 * Math.PI,
+                        0
+                    );
+                    canvas.fill();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
