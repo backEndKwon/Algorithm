@@ -11,12 +11,10 @@ const graph = {
     'E': ['F'],
     'F': []
 };
-
-
 */
 
 const DFS = (graph, startNode) => {
-  const visited = []; //탐색 끝낸 노드
+  let visited = []; //탐색 끝낸 노드
   let queue = []; // 탐색 예정 노드
 
   //우선 startNode를 queue에 넣는다.
@@ -55,3 +53,4 @@ const graph={
     'J':['I']
 }
 console.log(DFS(graph, 'A'));
+
