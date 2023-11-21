@@ -38,11 +38,10 @@ function fibonacci(x, memo = {}) {
   console.log(fibonacci(3)); // 출력: 
   /* 
   과정
-  f(3) = f(2) + f(1) // memo[3] = 2
-    f(2) = f(1) + f(0)
+  f(3) = f(2) + f(1)  // memo[3] = 2
+    f(2) = f(1) + f(0) // memo[2] = 1
         f(1) = 1
-        f(0) = 0 // memo[0] = 0
-    f(1) = 1
-    f(3) = 2
+        f(1) = 1
+    f(1) = 1 return 1
   */
   
