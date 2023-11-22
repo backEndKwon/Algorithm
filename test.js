@@ -1,37 +1,47 @@
 /* 
-H-INDEX
-42747
+동적프로그래밍 연습(DP)
+왜 DP를 사용하는가?
+피보나치수열의 경우, 재귀함수를 사용하면 이미 진행했던 계산들도 다시 계산하게 되어 비효율적임.
+이를 재귀적이며 반복적으로 연산한다하여 "부분 반복 문제(Overlapping Subproblem)"이라고 함.
 
-citations	return
-[3, 0, 6, 1, 5]	3
+그리고 "최적 부분 구조(Optimal Substructure)"  : 작은 부분(소단위)의 문제에서 구한 답이 큰 부분에도 동일하게 적용될수 있는 구조
+인데, 최적 부분 구조를 만족하면 dp를 사용할 수 있음.
 
-어떤 과학자가 발표한 논문 n편 중, 
-h번 이상 인용된 논문이 h편 이상이고 
-나머지 논문이 h번 이하 인용되었다면 h의 최댓값이 이 과학자의 H-Index입니다.
+여기서 memoziation이라는 방법을 사용(이전에 계산했던 최소 부분의 내용은 메모해놓는 거임-캐싱과 유사)
+*/
+/* 
+문제. 정수삼각형
+triangle	result
+[[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]	30
+삼각형이 주어졌을때 마지막 노드까지 합쳐서 나온 값중 최대갓을 구하라.
 */
 
 /* 
-이해x
+dp가 필요한 이유 : 7-8-0 7-8-1 을 계산한다고 했을때 7-8이 이미 계산되어있으면 다시 계산할 필요가 없음.
 */
-const solution = (citations) => {
-  let answer = 0;
-  citations = citations.sort((a, b) => b - a);
-  let arr = [];
-  for (let i = 0; i < citations.length; i++) {
-    /* for문돌때마다 arr에 삽입 */
-    arr.push(citations[i]);
-    /* arr의 길이가 citations[i]크게되면 break 그렇지 않으면 answer ++ */
-    console.log("answer:", answer, "citations[i]:", citations[i])
-    console.log("===========> ~ arr.length:", arr.length)
-    if (arr.length > citations[i]) {
-      break;
-    }
-    console.log("---------------------------")
-    answer++;
-  }
 
-  return answer;
+const solution = (triangle) => {
+  //피보나치수열과 유사한 형태일듯 싶다.
+  //dp는 어떤형태일지?
+  // memo은 항상 같이 반환해줘야함(업데이트 개념)
+  // 이중 for문으로 만약 [7]을 계산한다면 뒤에 [3,8] 중에 max값을 더해주는 방식으로 가면 될듯
+  for (let i = 1; i < triangle.length; i++) { // 시간복잡도 : O(n^2)
+    for (let j = 0; j < triangle[i].length; j++) {
+      //그 다음 행에 더해놓기
+      //만약
+      /* 
+                3   4
+              8    1    7
+    */
+      triangle[i][j] += Math.max(
+        triangle[i - 1][j - 1] || 0,
+        triangle[i - 1][j] || 0
+      );// 공간복잡도 O(1)
+    }
+  }
+  return Math.max(...triangle[triangle.length - 1]);
 };
 
-console.log(solution([3, 0, 6, 1, 5])); // 3
-// console.log(solution([9, 9, 9, 9, 1])); // 4
+/*  */
+
+console.log(solution([[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]));
