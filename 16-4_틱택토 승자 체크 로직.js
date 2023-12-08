@@ -15,6 +15,7 @@ tik-tac-toe 게임 승자 알아내기
 // checkWinner 함수를 통해서 현재 보드판에 winner가 있는지 체크!
 //있다면 누가 이겼는지 반환, 없다면 false반환
 // 3x3게임
+//brute force
 function checkWinner(board) {
   //가로 세로 대각선 체크
 
