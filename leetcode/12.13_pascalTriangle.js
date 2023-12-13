@@ -64,5 +64,5 @@ const generate = (numRows) => {
 
 
 console.log(generate(5)); //[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
-// console.log(solution(3)); //[[1],[1,1],[1,2,1]]
-// console.log(solution(1)); //[1]
+console.log(solution(3)); //[[1],[1,1],[1,2,1]]
+console.log(solution(1)); //[1]
