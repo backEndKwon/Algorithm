@@ -21,34 +21,35 @@ p.272
 
 //일단 (1)의 방법으로
 
-// function solution(numbers, m) {
-//   const result = [];
-//   let length = numbers.length
-//   for (let i = 0; i < m; i++) {
-//     //for문 안에서 진행
-//     //random값 뽑기
-//     let randomIndex = makeRandomIndex(length);
-//     console.log("👉 ~ randomIndex:", randomIndex)
-//     result.push(numbers[randomIndex]);
-//   }
-//   return result;
-// }
-// //랜덤인덱스는 함수로 따로 만들어주기
-// function makeRandomIndex(length) {
-//   let result = Math.floor(Math.random() * 10);
-//   console.log("👉 ~ result:", result)
-//   if (result < length) return result;
-//   else {
-//    return makeRandomIndex(length);
-//   }
-//   // console.log("👉 ~ Math.random():", Math.floor(Math.random()*10))
-// }
+function solution(numbers, m) {
+  const result = [];
+  let length = numbers.length
+  for (let i = 0; i < m; i++) {
+    //for문 안에서 진행
+    //random값 뽑기
+    let randomIndex = makeRandomIndex(length);
+    console.log("👉 ~ randomIndex:", randomIndex)
+    result.push(numbers[randomIndex]);
+  }
+  return result;
+}
+//랜덤인덱스는 함수로 따로 만들어주기
+function makeRandomIndex(length) {
+  let result = Math.floor(Math.random() * 10);
+  console.log("👉 ~ result:", result)
+  if (result < length) return result;
+  else {
+   return makeRandomIndex(length);
+  }
+  // console.log("👉 ~ Math.random():", Math.floor(Math.random()*10))
+}
 
-// let numbers = ["a", "b", "c", "d", "e"];
-// console.log(solution(numbers, 2));
-// console.log(makeRandomIndex())
+let numbers = ["a", "b", "c", "d", "e"];
+console.log(solution(numbers, 2));
+console.log(makeRandomIndex())
 
 /* 
+하다보니 선택된 확률을 동일하게 하는 것이 키포인트 이다.
 여기서 "선택된 확률을 동일하게 "하려면?
 
 Fisher-Yates 셔플 알고리즘을 사용하면 된다.
