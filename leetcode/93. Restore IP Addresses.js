@@ -39,27 +39,41 @@ Output: ["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
 
 그러면 나머지 부분은?
 // substring으로 i=0부터 i<=3인 값까지 자르면서 255가 안넘을 경우 temp에 붙이기
+// slice도 가능
+각 ip를 구해서 + "."으로 붙이면 될듯
 */
-var restoreIpAddresses = function (s) {
+let restoreIpAddresses = function (s) {
   let answer = [];
   //2가지 확실한 예외 조건을 만족하면 빈배열 반환
   if (s.length > 12 || s.length < 4) return [];
   //딱 4자리 일 경우 . 만 붙이기
-  if (s.length === 4) {
-    answer.push([...s].join("."));
-  }
-// answer.push(s.substring(1,4))
+  // answer.push(s.substring(1,4))
 
-//뭔가 이부분이 함수로 빼서 따로 작동시켜야 할듯
-for(let i=0; i<s.length; i++){
-    let temp = s.substring(i,)//뭔가 가져온 값이 있을 거고
-    if(Number(temp)<=255){
-
+  // 첫 substring값이 계속 0부터 하다가 255가 넘으면 i+1로 바뀌어야하는 로직이 있어야함
+  //아니면 slice으로 아예 잘라버리기
+  let track = function (s, ip, c) {
+    if (s.length === 0 && c == 0) answer.push(ip);
+    if (c === 0) {
+      return;
     }
-}
+    for (let i = 0; i < s.length; i++) {
+     if(i>= s.length) break;
+      let subIP = s.slice(0, i + 1); //뭔가 가져온 값이 있을 거고
+      if (Number(subIP) > 255 || (subIP.length > 1 && subIP[0] === "0")) return;
+
+      //모든조건이 맞으면?
+      //세그먼트가 4이면 ""으로 종료
+      track(s.slice(i + 1), ip + (c === 4 ? "" : ".") + subIP, c - 1);
+    }
+  };
+  track(s, "", 4);
+
   return answer;
 };
+
 
 console.log(restoreIpAddresses("25525511135"));
 console.log(restoreIpAddresses("0000"));
 console.log(restoreIpAddresses("101023"));
+
+//참고:https://www.youtube.com/watch?v=ORLBbFd5U_A
