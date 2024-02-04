@@ -4,14 +4,14 @@
 */
 
 /* 프로토타입 적용 전 */
-// //생성자 함수
-// function Circle(radius) {
-//   this.radius = radius;
-//   this.getArea = function () {
-//     //원의 넓이 구하는 공식 **2 는 제곱
-//     return Math.PI * this.radius ** 2;
-//   };
-// }
+//생성자 함수
+function Circle(radius) {
+  this.radius = radius;
+  this.getArea = function () {
+    //원의 넓이 구하는 공식 **2 는 제곱
+    return Math.PI * this.radius ** 2;
+  };
+}
 /*
 여기서 만약 class문으로 하려면
 class Circle{
