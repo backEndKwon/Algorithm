@@ -43,35 +43,32 @@ nums[mid]값이 target과 같다면 mid값 반환
 */
 //이진탐색으로 검색범위 반 log(n)
 let search = function (nums, target) {
-  let left = 0;
-  let right = nums.length - 1;
-
+  //조건부 이진탐색으로 log(n) 달성 가능
+  // nums는 정렬되지 않았지만 그 안에는 정렬된 배열이 2개로 구분됨
+  //그래서 mid index값과 left, right index에 대한 값들을 비교하면서 
+  //target이 좌측에 있는지 우측에 있는지 확인
+  //만약 target이 좌측에 있다면 rigth인덱스는 mid 인덱스에서 -1 한 값으로 점차 줄여주면 됨
+  // 그 반대는 left 인덱스는 mid 인덱스에서 +1 한값으로 늘려가서 범위를 좁여주면 됨
+  let [left, right] = [0, nums.length - 1]
   while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-
-    if (nums[mid] === target) {
-      return mid;
-    }
-
-    // 왼쪽 절반이 정렬되어 있는 경우
-    if (nums[left] <= nums[mid]) {
-      if (nums[left] <= target && target < nums[mid]) {
-        right = mid - 1;
-      } else {
-        left = mid + 1;
+      //만약 mid가 target과 일치할 경우 mid바로 반환하면 됨(mid는 index니까)
+      let mid = Math.floor((left + right) / 2)
+      if (nums[mid] === target) return mid
+      if (nums[left] <= nums[mid]) {//좌측이 정렬 되어있을떄
+          //target이 좌측에 있을 경우
+          if (nums[left] <= target && target < nums[mid]) {
+              right = mid - 1
+          } else { left = mid + 1 }
+      } else {// [7,8,9,0,1,2,3,4] 2// 우측이 정렬 되어있을때
+          if (target > nums[mid] && target <= nums[right]) {
+              left = mid + 1
+          } else {
+              right = mid - 1
+          }
       }
-    } else {
-      // 오른쪽 절반이 정렬되어 있는 경우
-      if (nums[mid] < target && target <= nums[right]) {
-        left = mid + 1;
-      } else {
-        right = mid - 1;
-      }
-    }
-  }
+  } return -1
 
-  return -1;
-};
+}
 
 console.log(search([4, 5, 6, 7, 0, 1, 2], 0)); // expected 4
 console.log(search([4, 5, 6, 7, 0, 1, 2], 3)); // expected -1
