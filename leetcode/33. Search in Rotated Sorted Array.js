@@ -41,8 +41,8 @@ left right로 나누어서 left 는 index 0부터, right 는 index 맨 마지막
 left가 right보다 커지면 종료되는 while문(이진탐색과 동일)
 nums[mid]값이 target과 같다면 mid값 반환
 */
+//이진탐색으로 검색범위 반 log(n)
 let search = function (nums, target) {
-  //index라고 생각하면됨
   let left = 0;
   let right = nums.length - 1;
 
@@ -52,12 +52,25 @@ let search = function (nums, target) {
     if (nums[mid] === target) {
       return mid;
     }
-    // 왼쪽이 정렬되어있을 경우 = nums[좌측인덱스]<= nums[중간인덱스]
-    // 왼
-    if(nums[left]<=nums[mid]){
 
+    // 왼쪽 절반이 정렬되어 있는 경우
+    if (nums[left] <= nums[mid]) {
+      if (nums[left] <= target && target < nums[mid]) {
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
+    } else {
+      // 오른쪽 절반이 정렬되어 있는 경우
+      if (nums[mid] < target && target <= nums[right]) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
     }
   }
+
+  return -1;
 };
 
 console.log(search([4, 5, 6, 7, 0, 1, 2], 0)); // expected 4
